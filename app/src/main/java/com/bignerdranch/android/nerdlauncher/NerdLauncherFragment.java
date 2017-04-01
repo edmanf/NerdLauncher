@@ -8,6 +8,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Layout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -85,6 +86,33 @@ public class NerdLauncherFragment extends Fragment {
             PackageManager pm = getActivity().getPackageManager();
             String appName = mResolveInfo.loadLabel(pm).toString();
             mNameTextView.setText(appName);
+        }
+    }
+
+    private class ActivityAdapter extends RecyclerView.Adapter<ActivityHolder> {
+
+        private final List<ResolveInfo> mActivities;
+
+        public ActivityAdapter(List<ResolveInfo> activities) {
+            mActivities = activities;
+        }
+
+        @Override
+        public ActivityHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            LayoutInflater inflater = LayoutInflater.from(getActivity());
+            View view = inflater.inflate(android.R.layout.simple_list_item_1, parent, false);
+            return new ActivityHolder(view);
+        }
+
+        @Override
+        public void onBindViewHolder(ActivityHolder holder, int position) {
+            ResolveInfo resolveInfo = mActivities.get(position);
+            holder.bindActivity(resolveInfo);
+        }
+
+        @Override
+        public int getItemCount() {
+            return mActivities.size();
         }
     }
 }
