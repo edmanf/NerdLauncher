@@ -16,7 +16,7 @@ import android.view.ViewGroup;
 public class NerdLauncherFragment extends Fragment {
     private RecyclerView mRecyclerView;
 
-    public NerdLauncherFragment newInstance() {
+    public static NerdLauncherFragment newInstance() {
         return new NerdLauncherFragment();
     }
 
